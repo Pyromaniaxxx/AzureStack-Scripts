@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AzureStackConfig>
+    <WorkPath>work</WorkPath>
+    <VHDXPath>c:\mas</VHDXPath>
+    <VHDXFileName>CloudBuilder.vhdx</VHDXFileName>
+    <MasterVHDXFullPath>\\Fileserver\CloudBuilder.vhdx</MasterVHDXFullPath>
+    <deploy>
+        <deployType>AAD</deployType>
+        <AdminPassword>password</AdminPassword>
+        <AADTenantName>testTenant.onmicrosoft.com</AADTenantName>
+        <AADAccount>MASAdmin@testTenant.onmicrosoft.com</AADAccount>
+        <AADPassword>password</AADPassword>
+    </deploy>
+    <Host>
+        <Hostname>MASHost01</Hostname>
+        <Password>password</Password>
+        <NIC1>Eth</NIC1>
+        <NIC10>Chelsio</NIC10>
+        <Network>
+            <Type>DHCP</Type>
+        </Network>
+    </Host>
+    <NatVM>
+        <Network>
+            <Type>Static</Type>
+            <IPv4Address>192.168.0.2</IPv4Address>
+            <IPv4Subnet>192.168.0.0/24</IPv4Subnet>
+            <IPv4DefaultGateway>192.168.0.250</IPv4DefaultGateway>
+        </Network>
+    </NatVM>
+    <PIR>
+        <WS2016DC>            
+            <ISOPath>D:\work\ja_windows_server_2016_x64_dvd.iso</ISOPath>
+        </WS2016DC>
+    </PIR>
+</AzureStackConfig>
