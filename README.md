@@ -19,7 +19,7 @@ expand-archive master.zip -DestinationPath . -Force;
 
 ## ■ 概要
 
-### Deploy 
+### 1. Deploy 
 
 **Set-VHDBoot.ps1**  
 `Cloudbuilder.vhdx` を上書きコピーし、VHD boot設定をする
@@ -30,7 +30,7 @@ expand-archive master.zip -DestinationPath . -Force;
 **Deploy-MAS.ps1**  
 `InstallAzureStackPOC.ps1` を呼び出して Azure Stack の展開を開始
 
-### AddVMImage 
+### 2. AddVMImage 
 
 **Add-WS2016VMImage.ps1**  
 Windows Server 2016 の VMイメージを追加する
