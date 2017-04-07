@@ -79,6 +79,8 @@ if ($PsCmdlet.ParameterSetName -eq "File")
 
 ## inisialize
 
+## check ISO file path
+Write-Host "check ISO file path : $ISOPath" -ForegroundColor Green;
 if (!(Test-Path $ISOPath))
 {
     Write-Warning -Message "ISOPath of the not exists. $ISOPath";
@@ -97,17 +99,22 @@ else
 
 
 ## install Azure Stack PowerShell
+Write-Host "install Azure Stack PowerShell" -ForegroundColor Green;
 Install-Module -Name AzureRM -RequiredVersion 1.2.8 -Scope CurrentUser ;
 Install-Module -Name AzureStack ;
 
 ## Download Azure Stack tools
+Write-Host "Download Azure Stack tools" -ForegroundColor Green;
 invoke-webrequest https://github.com/Azure/AzureStack-Tools/archive/master.zip -OutFile "$workPath\master.zip" ;
 expand-archive "$workPath\master.zip" -DestinationPath $workPath -Force;
 
 ## import module
+Write-Host "import module" -ForegroundColor Green;
 Import-Module $workPath\AzureStack-Tools-master\Connect\AzureStack.Connect.psm1 ;
 Import-Module $workPath\AzureStack-Tools-master\ComputeAdmin\AzureStack.ComputeAdmin.psm1;
 
+## create param
+Write-Host "create param" -ForegroundColor Green;
 switch ($DeployType)
 {
     'ADFS' 
@@ -127,5 +134,7 @@ switch ($DeployType)
         Write-Warning -Message "param error : $DeployType";
     }
 }
-
-New-Server2016VMImage -ISOPath $ISOPath -TenantId $aadTenant -AzureStackCredentials $aadcred -Net35; 
+## New-Server2016VMImage
+Write-Host "New-Server2016VMImage" -ForegroundColor Green;
+Add-AzureStackAzureRmEnvironment -Name "AzureStackAdmin" -ArmEndpoint "https://adminmanagement.local.azurestack.external"  
+New-Server2016VMImage -ISOPath $ISOPath -TenantId $aadTenant -AzureStackCredentials $aadcred -EnvironmentName "AzureStackAdmin" -Net35; 

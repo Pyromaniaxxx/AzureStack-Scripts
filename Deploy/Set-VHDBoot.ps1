@@ -66,7 +66,7 @@ $Uri = 'https://raw.githubusercontent.com/Azure/AzureStack-Tools/master/Deployme
 Write-Host "Copy vhdx" -ForegroundColor Green;
 Write-Verbose " Source Path : $MasterVHDXFullPath";
 Write-Verbose " Destination Path : $VHDXPath";
-##Copy-Item -Path $MasterVHDXFullPath -Destination $VHDXPath -Force;
+Copy-Item -Path $MasterVHDXFullPath -Destination $VHDXPath -Force;
 
 # change location
 Write-Host "Change location : $VHDXPath" -ForegroundColor Green;
