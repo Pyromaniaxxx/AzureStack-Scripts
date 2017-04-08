@@ -100,8 +100,8 @@ else
 
 ## install Azure Stack PowerShell
 Write-Host "install Azure Stack PowerShell" -ForegroundColor Green;
-Install-Module -Name AzureRM -RequiredVersion 1.2.8 -Scope CurrentUser ;
-Install-Module -Name AzureStack ;
+Install-Module -Name AzureRM -RequiredVersion 1.2.8 -Scope CurrentUser -Force ;
+Install-Module -Name AzureStack -Force;
 
 ## Download Azure Stack tools
 Write-Host "Download Azure Stack tools" -ForegroundColor Green;
@@ -137,4 +137,4 @@ switch ($DeployType)
 ## New-Server2016VMImage
 Write-Host "New-Server2016VMImage" -ForegroundColor Green;
 Add-AzureStackAzureRmEnvironment -Name "AzureStackAdmin" -ArmEndpoint "https://adminmanagement.local.azurestack.external"  
-New-Server2016VMImage -ISOPath $ISOPath -TenantId $aadTenant -AzureStackCredentials $aadcred -EnvironmentName "AzureStackAdmin" -Net35; 
+New-Server2016VMImage -ISOPath $ISOPath -TenantId $aadTenant -AzureStackCredentials $aadcred -EnvironmentName "AzureStackAdmin"; 
