@@ -75,4 +75,3 @@ Get-WindowsFeature "SNMP-Service" | Add-WindowsFeature -IncludeAllSubFeature -In
 ## rename computer
 Write-Host "rename computer" -ForegroundColor Green;
 Rename-Computer -NewName $HostName -Restart
-
