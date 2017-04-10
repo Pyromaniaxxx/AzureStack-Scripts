@@ -70,7 +70,6 @@ if ($PsCmdlet.ParameterSetName -eq "File")
     $Password = $ConfigXml.AzureStackConfig.deploy.AdminPassword;
 
     $WorkFolder = $ConfigXml.AzureStackConfig.WorkPath;
-    $ADAccount = $ConfigXml.AzureStackConfig.deploy.AdminPassword;
 
     $AADTenantName = $ConfigXml.AzureStackConfig.deploy.AADTenantName;
     $AADAccount = $ConfigXml.AzureStackConfig.deploy.AADAccount;
@@ -100,8 +99,12 @@ else
 
 ## install Azure Stack PowerShell
 Write-Host "install Azure Stack PowerShell" -ForegroundColor Green;
-Install-Module -Name AzureRM -RequiredVersion 1.2.8 -Scope CurrentUser -Force ;
-Install-Module -Name AzureStack -Force;
+#Get-PSRepository
+Install-Module -Name AzureRm.BootStrapper -Force -Confirm:$false;
+Use-AzureRmProfile -Profile 2017-03-09-profile;
+Install-Module -Name AzureStack -RequiredVersion 1.2.9 -Force -Confirm:$false;
+Get-Module -ListAvailable | where-Object {$_.Name -like “Azure*”} | Format-Table;
+
 
 ## Download Azure Stack tools
 Write-Host "Download Azure Stack tools" -ForegroundColor Green;
@@ -110,8 +113,8 @@ expand-archive "$workPath\master.zip" -DestinationPath $workPath -Force;
 
 ## import module
 Write-Host "import module" -ForegroundColor Green;
-Import-Module $workPath\AzureStack-Tools-master\Connect\AzureStack.Connect.psm1 ;
-Import-Module $workPath\AzureStack-Tools-master\ComputeAdmin\AzureStack.ComputeAdmin.psm1;
+Import-Module $workPath\AzureStack-Tools-master\Connect\AzureStack.Connect.psm1 -Force ;
+Import-Module $workPath\AzureStack-Tools-master\ComputeAdmin\AzureStack.ComputeAdmin.psm1 -Force;
 
 ## create param
 Write-Host "create param" -ForegroundColor Green;
@@ -136,5 +139,5 @@ switch ($DeployType)
 }
 ## New-Server2016VMImage
 Write-Host "New-Server2016VMImage" -ForegroundColor Green;
-Add-AzureStackAzureRmEnvironment -Name "AzureStackAdmin" -ArmEndpoint "https://adminmanagement.local.azurestack.external"  
+Add-AzureStackAzureRmEnvironment -Name "AzureStackAdmin" -ArmEndpoint "https://adminmanagement.local.azurestack.external" 
 New-Server2016VMImage -ISOPath $ISOPath -TenantId $aadTenant -AzureStackCredentials $aadcred -EnvironmentName "AzureStackAdmin"; 

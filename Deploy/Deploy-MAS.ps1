@@ -11,8 +11,6 @@
 .NOTES
    Auther : S.Hiro
    version: 0.5
-      
-   Manual parameter is not implemented yet
 #>
 [CmdletBinding(DefaultParametersetName="File")]
 Param

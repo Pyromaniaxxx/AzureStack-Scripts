@@ -73,5 +73,27 @@ Windows Server 2016 の VMイメージを追加する
             <ISOPath>%Windows Server 2016 ISO File Path%</ISOPath>
         </WS2016DC>
     </PIR>
+    <ResourceProvider>
+        <mySQL>
+            <DLURI>https://aka.ms/azurestackmysqlrptp3</DLURI>
+            <ResourceGroupName>System.MySql</ResourceGroupName>
+            <VMName>SystemMySqlRP</VMName>
+            <VMAccount>mySQLAdmin</VMAccount>
+            <VMPass>%password%</VMPass>
+            <AcceptLicense>True</AcceptLicense>
+            <SilentInstall>True</SilentInstall>
+        </mySQL>
+        <MSSQL>
+            <DLURI>https://aka.ms/azurestacksqlrptp3</DLURI>
+            <ResourceGroupName>System.Sql</ResourceGroupName>
+            <VMName>SQLVM</VMName>
+            <VMAccount>SQLAdmin</VMAccount>
+            <VMPass>%password%</VMPass>
+        </MSSQL>
+    </ResourceProvider>
+    <RegisterAzureSubscription>
+        <AADTenantName>%Tenant01.onmicrosoft.com%</AADTenantName>
+        <SubscriptionID>%1122d559-9719-49fa-9eae-84b1d7537076%</SubscriptionID>
+    </RegisterAzureSubscription>
 </AzureStackConfig>
 ```
