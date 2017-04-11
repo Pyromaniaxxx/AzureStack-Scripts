@@ -4,16 +4,6 @@
 
 VHD boot の設定から `InstallAzureStackPOC.ps1` の実行まで。
 
-# ■ Get started
-
-Script download
-
-```download-script
-$path = 'c:\work';
-New-Item $path -ItemType Directory -Force;
-invoke-webrequest https://github.com/Pyromaniaxxx/AzureStack-Scripts/archive/master.zip -OutFile $path\master.zip;
-expand-archive $path\master.zip -DestinationPath $path -Force;
-```
 
 # ■ MASConfig.xml
 
