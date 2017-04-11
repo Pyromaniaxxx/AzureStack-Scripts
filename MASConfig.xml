@@ -57,16 +57,6 @@
             <pfxPassword>Password1!</pfxPassword>
         </AppService>
     </ResourceProvider>
-    <PlanAndOffer>
-        <PLAN Name="Plan1">
-            <Compute>true</Compute>
-            <Storage>true</Storage>
-        </PLAN>
-        <PLAN Name="Plan2">
-            <Compute>false</Compute>
-            <Storage>false</Storage>
-        </PLAN>
-    </PlanAndOffer>
     <RegisterAzureSubscription>
         <AADTenantName>subscriptionOwner.onmicrosoft.com</AADTenantName>
         <SubscriptionID>1122d559-9719-49fa-9eae-84b1d7537076</SubscriptionID>
