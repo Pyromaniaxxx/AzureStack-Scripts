@@ -41,18 +41,20 @@ if ($PsCmdlet.ParameterSetName -eq "File")
     if (!(Test-Path $ConfigFile))
     {
         Write-Warning -Message "file not found : $ConfigFile";
-        return;
+        return $false;
     }
     ## load config file
     Write-Host "load config file : $ConfigFile" -ForegroundColor Green;
     [xml]$ConfigXml = Get-Content -Path $ConfigFile -Encoding UTF8;
+    $WorkFolder = $ConfigXml.AzureStackConfig.WorkPath;
+
     $HostPassword = $ConfigXml.AzureStackConfig.Host.Password;
     $VHDXFullPath = (Join-Path $ConfigXml.AzureStackConfig.VHDXPath $ConfigXml.AzureStackConfig.VHDXFileName);
     $VHDXPath = $ConfigXml.AzureStackConfig.VHDXPath;
     $MasterVHDXFullPath = $ConfigXml.AzureStackConfig.MasterVHDXFullPath;
 }
 
-# Create folder
+# Create VHDX folder
 if (Test-Path -Path $VHDXPath)
 {
     Write-Host "skip Create folder : $VHDXPath" -ForegroundColor Green;
@@ -63,8 +65,8 @@ else
     New-Item $VHDXPath -Type directory -Force | Out-Null;
 }
 
-# Download files
-Write-Host "Download files" -ForegroundColor Green;
+# Download AzureStack-Tools
+Write-Host "Download AzureStack-Tools" -ForegroundColor Green;
 $Uri = 'https://raw.githubusercontent.com/Azure/AzureStack-Tools/master/Deployment/';
 'BootMenuNoKVM.ps1', 'PrepareBootFromVHD.ps1', 'unattend_NoKVM.xml' | ForEach-Object { Invoke-WebRequest ($uri + $_) -OutFile ($VHDXPath + '\' + $_) } ;
 
@@ -74,14 +76,14 @@ if ($MasterVHDXFullPath -ne "none")
     {
         # copy CloudBuilder
         Write-Host "Copy vhdx" -ForegroundColor Green;
-        Write-Verbose " Source Path : $MasterVHDXFullPath";
-        Write-Verbose " Destination Path : $VHDXPath";
+        Write-Verbose "Source Path : $MasterVHDXFullPath";
+        Write-Verbose "Destination Path : $VHDXPath";
         Copy-Item -Path $MasterVHDXFullPath -Destination $VHDXPath -Force;        
     }
     else
     {
-        Write-Error " file not found ";
-        return ;        
+        Write-Warning -Message "Master VHDX file not found" ;
+        return $false;
     }
 }
 else
@@ -91,4 +93,5 @@ else
 
 # Set vhd boot
 Write-Host "Set vhd boot" -ForegroundColor Green;
-& "$VHDXPath\PrepareBootFromVHD.ps1" -CloudBuilderDiskPath $VHDXFullPath -ApplyUnattend -AdminPassword $HostPassword -Verbose
+Set-Location $VHDXPath; 
+.\PrepareBootFromVHD.ps1 -CloudBuilderDiskPath $VHDXFullPath -AdminPassword $HostPassword -ApplyUnattend -Verbose;

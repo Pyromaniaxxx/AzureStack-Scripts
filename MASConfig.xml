@@ -3,17 +3,17 @@
     <WorkPath>work</WorkPath>
     <VHDXPath>c:\mas</VHDXPath>
     <VHDXFileName>CloudBuilder.vhdx</VHDXFileName>
-    <MasterVHDXFullPath>\\Fileserver\CloudBuilder.vhdx</MasterVHDXFullPath>
+    <MasterVHDXFullPath>\\FileServerShare\CloudBuilder.vhdx</MasterVHDXFullPath>
     <deploy>
-        <deployType>AAD</deployType>
-        <AdminPassword>password</AdminPassword>
-        <AADTenantName>testTenant.onmicrosoft.com</AADTenantName>
-        <AADAccount>MASAdmin@testTenant.onmicrosoft.com</AADAccount>
-        <AADPassword>password</AADPassword>
+        <deployType>"AAD or "ADFS"</deployType>
+        <AdminPassword>Password1!</AdminPassword>
+        <AADTenantName>Tenant.onmicrosoft.com</AADTenantName>
+        <AADAccount>MASAdmin@Tenant.onmicrosoft.com</AADAccount>
+        <AADPassword>Password1!</AADPassword>
     </deploy>
     <Host>
         <Hostname>MASHost01</Hostname>
-        <Password>password</Password>
+        <Password>Password1!</Password>
         <NIC1>Eth</NIC1>
         <NIC10>Chelsio</NIC10>
         <Network>
@@ -22,7 +22,7 @@
     </Host>
     <NatVM>
         <Network>
-            <Type>Static</Type>
+            <Type>"Static" or "DHCP"</Type>
             <IPv4Address>192.168.0.2</IPv4Address>
             <IPv4Subnet>192.168.0.0/24</IPv4Subnet>
             <IPv4DefaultGateway>192.168.0.250</IPv4DefaultGateway>
@@ -30,8 +30,9 @@
     </NatVM>
     <PIR>
         <WS2016DC>
-            <ISOPath>D:\work\ja_windows_server_2016_x64_dvd.iso</ISOPath>
+            <ISOPath>D:\work\en_windows_server_2016_x64_dvd.iso</ISOPath>          
         </WS2016DC>
+        <WS2012DC>none</WS2012DC>
     </PIR>
     <ResourceProvider>
         <mySQL>
@@ -39,7 +40,7 @@
             <ResourceGroupName>System.MySql</ResourceGroupName>
             <VMName>SystemMySqlRP</VMName>
             <VMAccount>mySQLAdmin</VMAccount>
-            <VMPass>password</VMPass>
+            <VMPass>Password1!Password1!</VMPass>
             <AcceptLicense>True</AcceptLicense>
             <SilentInstall>True</SilentInstall>
         </mySQL>
@@ -48,11 +49,16 @@
             <ResourceGroupName>System.Sql</ResourceGroupName>
             <VMName>SQLVM</VMName>
             <VMAccount>SQLAdmin</VMAccount>
-            <VMPass>password</VMPass>
+            <VMPass>Password1!Password1!</VMPass>
         </MSSQL>
+        <AppService>
+            <DLURIInstaller>http://aka.ms/appsvconmastp3installer</DLURIInstaller>
+            <DLURIHelper>http://aka.ms/appsvconmastp3helper</DLURIHelper>
+            <pfxPassword>Password1!</pfxPassword>
+        </AppService>
     </ResourceProvider>
     <RegisterAzureSubscription>
-        <AADTenantName>Tenant01.onmicrosoft.com</AADTenantName>
+        <AADTenantName>subscriptionOwner.onmicrosoft.com</AADTenantName>
         <SubscriptionID>1122d559-9719-49fa-9eae-84b1d7537076</SubscriptionID>
     </RegisterAzureSubscription>
 </AzureStackConfig>
