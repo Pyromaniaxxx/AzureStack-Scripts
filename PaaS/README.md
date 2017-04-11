@@ -18,7 +18,7 @@ AppService 部分は作成中
             <ResourceGroupName>System.MySql</ResourceGroupName>
             <VMName>SystemMySqlRP</VMName>
             <VMAccount>mySQLAdmin</VMAccount>
-            <VMPass>1qaz!QAZ1qaz</VMPass>
+            <VMPass>Password1!Password1!</VMPass>
             <AcceptLicense>True</AcceptLicense>
             <SilentInstall>True</SilentInstall>
         </mySQL>
@@ -27,15 +27,14 @@ AppService 部分は作成中
             <ResourceGroupName>System.Sql</ResourceGroupName>
             <VMName>SQLVM</VMName>
             <VMAccount>SQLAdmin</VMAccount>
-            <VMPass>1qaz!QAZ1qaz</VMPass>
+            <VMPass>Password1!Password1!</VMPass>
         </MSSQL>
         <AppService>
             <DLURIInstaller>http://aka.ms/appsvconmastp3installer</DLURIInstaller>
             <DLURIHelper>http://aka.ms/appsvconmastp3helper</DLURIHelper>
-            <pfxPassword>1qaz!QAZ</pfxPassword>
+            <pfxPassword>Password1!</pfxPassword>
         </AppService>
     </ResourceProvider>
-
 ```
 
 
