@@ -103,7 +103,6 @@ Write-Host "install Azure Stack PowerShell" -ForegroundColor Green;
 Install-Module -Name AzureRm.BootStrapper -Force -Confirm:$false;
 Use-AzureRmProfile -Profile 2017-03-09-profile;
 Install-Module -Name AzureStack -RequiredVersion 1.2.9 -Force -Confirm:$false;
-Get-Module -ListAvailable | where-Object {$_.Name -like “Azure*”} | Format-Table;
 
 
 ## Download Azure Stack tools
