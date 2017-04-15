@@ -121,11 +121,12 @@ $VMcred = New-Object System.Management.Automation.PSCredential($VMAccount, $VMPa
 
 $param = @{
     'DirectoryTenantID' = $aadTenant;
+    'ArmEndpoint' = "https://adminmanagement.local.azurestack.external";
+    'TenantArmEndpoint' = "https://management.local.azurestack.external";
+    'AzCredential' = $cred;
     'VMLocalCredential' = $VMcred;
     'ResourceGroupName' = $ResourceGroupName;
     'VmName' = $VMName;
-    'ArmEndpoint' = "https://adminmanagement.local.azurestack.external";
-    'TenantArmEndpoint' = "https://management.local.azurestack.external";
     'AcceptLicense' = $true;
     'SilentInstall' = $true;
 }
@@ -133,5 +134,5 @@ $param = @{
 $param
 ## DeploySQLProvider
 Write-Host "DeploySQLProvider" -ForegroundColor Green;
-Set-Location "$workPath\rps\sqlrp"
+Set-Location "$workPath\rps\mysqlrp"
 .\DeployMySQLProvider.ps1 @param -Verbose;
