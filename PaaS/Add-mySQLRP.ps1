@@ -49,7 +49,7 @@ if ($PsCmdlet.ParameterSetName -eq "File")
     {
         'ADFS'
         {
-            $Account = $ConfigXml.AzureStackConfig.deploy.ADAccount;
+            $Account = "azurestack\azurestackadmin";
             $Password = $ConfigXml.AzureStackConfig.deploy.AdminPassword;
         }
         'AAD'
