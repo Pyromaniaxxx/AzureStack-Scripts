@@ -99,11 +99,10 @@ else
 
 ## install Azure Stack PowerShell
 Write-Host "install Azure Stack PowerShell" -ForegroundColor Green;
-#Get-PSRepository
-Install-Module -Name AzureRm.BootStrapper -Force -Confirm:$false;
-Use-AzureRmProfile -Profile 2017-03-09-profile;
-Install-Module -Name AzureStack -RequiredVersion 1.2.9 -Force -Confirm:$false;
-
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted;
+Install-Module -Name AzureRm.BootStrapper;
+Use-AzureRmProfile -Profile 2017-03-09-profile -Force;
+Install-Module -Name AzureStack -RequiredVersion 1.2.9 ;
 
 ## Download Azure Stack tools
 Write-Host "Download Azure Stack tools" -ForegroundColor Green;
@@ -136,7 +135,16 @@ switch ($DeployType)
         Write-Warning -Message "param error : $DeployType";
     }
 }
+
+$param = @{
+    'ISOPath' = $ISOPath;
+    'TenantId' = $aadTenant;
+    'AzureStackCredentials' = $aadcred;
+    'EnvironmentName' = "AzureStackAdmin";
+}
+$param
+
 ## New-Server2016VMImage
 Write-Host "New-Server2016VMImage" -ForegroundColor Green;
 Add-AzureStackAzureRmEnvironment -Name "AzureStackAdmin" -ArmEndpoint "https://adminmanagement.local.azurestack.external" 
-New-Server2016VMImage -ISOPath $ISOPath -TenantId $aadTenant -AzureStackCredentials $aadcred -EnvironmentName "AzureStackAdmin"; 
+New-Server2016VMImage @param -Verbose; 
