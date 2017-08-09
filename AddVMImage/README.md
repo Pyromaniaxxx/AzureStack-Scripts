@@ -21,7 +21,7 @@ Windows Server 2016 VM イメージ追加
 
 # ■ Script
 
-**Add-WS2016VMImage.ps1**  
+**Add-AzureStackDefaultVMImage.ps1**  
 - Windows Server 2016 DC のVMイメージを追加
 
 日本語版ISOファイルでの作成もできるが、SQLRPの展開で失敗するため英語版ISOを使うことが望ましい
