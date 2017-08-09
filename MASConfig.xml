@@ -4,6 +4,7 @@
     <VHDXPath>c:\mas</VHDXPath>
     <VHDXFileName>CloudBuilder.vhdx</VHDXFileName>
     <MasterVHDXFullPath>\\FileServerShare\CloudBuilder.vhdx</MasterVHDXFullPath>
+    <ExternalDomainName>azurestack.external</ExternalDomainName>
     <deploy>
         <deployType>"AAD or "ADFS"</deployType>
         <AdminPassword>Password1!</AdminPassword>
@@ -11,23 +12,6 @@
         <AADAccount>MASAdmin@Tenant.onmicrosoft.com</AADAccount>
         <AADPassword>Password1!</AADPassword>
     </deploy>
-    <Host>
-        <Hostname>MASHost01</Hostname>
-        <Password>Password1!</Password>
-        <NIC1>Eth</NIC1>
-        <NIC10>Chelsio</NIC10>
-        <Network>
-            <Type>DHCP</Type>
-        </Network>
-    </Host>
-    <NatVM>
-        <Network>
-            <Type>"Static" or "DHCP"</Type>
-            <IPv4Address>192.168.0.2</IPv4Address>
-            <IPv4Subnet>192.168.0.0/24</IPv4Subnet>
-            <IPv4DefaultGateway>192.168.0.250</IPv4DefaultGateway>
-        </Network>
-    </NatVM>
     <PIR>
         <WS2016DC>
             <ISOPath>D:\work\en_windows_server_2016_x64_dvd.iso</ISOPath>          
@@ -36,29 +20,38 @@
     </PIR>
     <ResourceProvider>
         <mySQL>
-            <DLURI>https://aka.ms/azurestackmysqlrptp3</DLURI>
-            <ResourceGroupName>System.MySql</ResourceGroupName>
-            <VMName>SystemMySqlRP</VMName>
+            <DLURI>https://aka.ms/azurestackmysqlrp</DLURI>
+            <ResourceGroupName>MySQLRPRG</ResourceGroupName>
+            <VMName>MySQLRP</VMName>
             <VMAccount>mySQLAdmin</VMAccount>
             <VMPass>Password1!Password1!</VMPass>
             <AcceptLicense>True</AcceptLicense>
             <SilentInstall>True</SilentInstall>
+            <pfxPassword>Password1!</pfxPassword>
+            <DBResourceGroupName>DBHostingRG</DBResourceGroupName>
+            <DBVMAccount>mySQLAdmin</DBVMAccount>
+            <HostingTotalSpaceMB>10240</HostingTotalSpaceMB>
+            <HostingSkuName>MySQL</HostingSkuName>
         </mySQL>
         <MSSQL>
-            <DLURI>https://aka.ms/azurestacksqlrptp3</DLURI>
-            <ResourceGroupName>System.Sql</ResourceGroupName>
-            <VMName>SQLVM</VMName>
+            <DLURI>https://aka.ms/azurestacksqlrp</DLURI>
+            <ResourceGroupName>SqlRPRG</ResourceGroupName>
+            <VMName>SqlRP</VMName>
             <VMAccount>SQLAdmin</VMAccount>
             <VMPass>Password1!Password1!</VMPass>
+            <pfxPassword>Password1!</pfxPassword>
+            <DBResourceGroupName>DBHostingRG</DBResourceGroupName>
+            <DBVMAccount>SQLAdmin</DBVMAccount>
+            <DBVMPass>Password1!Password1!</DBVMPass>
         </MSSQL>
         <AppService>
-            <DLURIInstaller>http://aka.ms/appsvconmastp3installer</DLURIInstaller>
-            <DLURIHelper>http://aka.ms/appsvconmastp3helper</DLURIHelper>
+            <DLURIInstaller>http://aka.ms/appsvconmasrc1installer</DLURIInstaller>
+            <DLURIHelper>http://aka.ms/appsvconmasrc1helper</DLURIHelper>
             <pfxPassword>Password1!</pfxPassword>
         </AppService>
     </ResourceProvider>
     <RegisterAzureSubscription>
         <AADTenantName>subscriptionOwner.onmicrosoft.com</AADTenantName>
-        <SubscriptionID>1122d559-9719-49fa-9eae-84b1d7537076</SubscriptionID>
+        <SubscriptionID>1122d559-9719-49fa-9eae-84b1d7537076(Sample)</SubscriptionID>
     </RegisterAzureSubscription>
 </AzureStackConfig>
